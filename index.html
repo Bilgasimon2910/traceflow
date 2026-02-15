@@ -1,33 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TraceFlow AI</title>
+  <title>TraceFlow AI – Log Analysis & Test Generation</title>
+  <meta charset="utf-8">
 </head>
-<body style="font-family: Arial; padding: 40px;">
-  <h1>TraceFlow AI</h1>
-  <p>Paste logs. Get root cause. Fix faster.</p>
+<body style="font-family: Arial; padding: 40px; max-width: 1000px; margin:auto;">
 
-  <textarea id="logs" rows="15" cols="100"
-    placeholder="Paste your logs here..."></textarea><br><br>
+<h1>TraceFlow AI</h1>
+<h3>AI Agents for Engineers, Testers, and QA Teams</h3>
 
-  <button onclick="analyze()">Analyze Logs</button>
+<p>
+TraceFlow provides specialized AI agents that convert
+<strong>logs</strong> and <strong>requirements</strong>
+into <strong>clear, actionable engineering deliverables</strong>.
+</p>
 
-  <pre id="output" style="margin-top:20px;"></pre>
+<hr/>
 
-<script>
-async function analyze() {
-  const logs = document.getElementById("logs").value;
-  document.getElementById("output").innerText = "Analyzing...";
+<h2>🤖 TraceFlow Log Analyzer AI</h2>
+<p><strong>Turn logs into root cause — instantly.</strong></p>
 
-  const res = await fetch("/analyze", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({logs})
-  });
+<ul>
+  <li>Analyze application, Kafka, and middleware logs</li>
+  <li>Identify root cause with reasoning</li>
+  <li>Provide fix & prevention steps</li>
+  <li>Trace-ID aware failure timelines</li>
+</ul>
 
-  const data = await res.json();
-  document.getElementById("output").innerText = data.analysis;
-}
-</script>
+<p><strong>Best for:</strong> Kafka engineers, SREs, on-call teams</p>
+
+<button>Analyze Logs</button>
+
+<hr/>
+
+<h2>🧪 TestGen AI</h2>
+<p><strong>From requirements to complete test artifacts.</strong></p>
+
+<ul>
+  <li>Automatic Positive, Negative, Edge & Performance cases</li>
+  <li>Feature & requirement-based test case creation</li>
+  <li>Exact file comparison (XML / JSON / CSV / TXT)</li>
+  <li>Test strategy & documentation generation</li>
+</ul>
+
+<p>
+<strong>Outputs are ALWAYS:</strong><br/>
+✔ Structured & documented<br/>
+✔ Ready for Azure Test Plans / Excel / Jira
+</p>
+
+<button>Generate Test Artifacts</button>
+
+<hr/>
+
+<h2>👤 Who This Is For</h2>
+<ul>
+  <li>QA & Test Engineers</li>
+  <li>Automation Engineers</li>
+  <li>Backend & Middleware Teams</li>
+  <li>Platform & Migration Teams</li>
+</ul>
+
+<hr/>
+
+<h2>📩 Get Early Access</h2>
+<p>
+Email: <b>admin@traceflow.in</b><br/>
+Subject: TraceFlow AI Early Access
+</p>
+
+<p><i>Built by a Middleware & Test Automation Architect.</i></p>
+
 </body>
 </html>
