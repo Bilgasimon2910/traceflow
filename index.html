@@ -4,55 +4,111 @@
   <title>TraceFlow AI</title>
   <meta charset="utf-8">
 </head>
-<body style="font-family: Arial; padding: 40px; max-width: 900px; margin:auto;">
+
+<body style="font-family: Arial; padding: 40px; max-width: 1000px; margin:auto;">
 
 <h1>TraceFlow AI</h1>
 <h3>AI Agents for Log Analysis & Test Generation</h3>
 
 <p>
 TraceFlow provides focused AI agents for engineers and testers.
-No generic chatbots — only <b>clear deliverables</b>.
+No generic chatbots — only <b>clear, production-ready deliverables</b>.
 </p>
 
 <hr/>
+
+<!-- ================= LOG ANALYZER ================= -->
 
 <h2>🤖 Log Analyzer AI</h2>
 <p>
-Paste application, Kafka, or middleware logs and get:
+Paste application, Kafka, or middleware logs to get a
+<strong>Root Cause Analysis (RCA)</strong>.
 </p>
-<ul>
-  <li>Root cause analysis</li>
-  <li>Why it happened</li>
-  <li>How to fix it</li>
-  <li>How to prevent it</li>
-</ul>
 
-<p>
-👉 Calls backend API hosted separately
-</p>
+<textarea id="logsInput" rows="10" cols="100"
+  placeholder="Paste logs here..."></textarea><br/><br/>
+
+<button onclick="analyzeLogs()">Analyze Logs</button>
+
+<pre id="logOutput"
+     style="margin-top:20px; white-space: pre-wrap; background:#f6f6f6; padding:15px;"></pre>
 
 <hr/>
+
+<!-- ================= TESTGEN AI ================= -->
 
 <h2>🧪 TestGen AI</h2>
 <p>
-Convert requirements or files into complete QA artifacts:
+Enter requirements or feature description to generate
+<strong>complete test artifacts</strong>.
 </p>
-<ul>
-  <li>Positive, Negative, Edge test cases</li>
-  <li>Performance & load scenarios</li>
-  <li>Exact file comparisons</li>
-</ul>
+
+<textarea id="testGenInput" rows="6" cols="100"
+  placeholder="Enter requirements / feature details here..."></textarea><br/><br/>
+
+<button onclick="generateTests()">Generate Test Artifacts</button>
+
+<pre id="testGenOutput"
+     style="margin-top:20px; white-space: pre-wrap; background:#f6f6f6; padding:15px;"></pre>
 
 <hr/>
 
+<!-- ================= CONTACT ================= -->
+
 <h2>📩 Contact</h2>
 <p>
-Email: <b>admin@traceflow.in</b>
+Early access & enterprise usage:<br/>
+<b>admin@traceflow.in</b>
 </p>
 
-<p style="color: gray;">
+<p style="color: gray; font-size: 14px;">
 Built by a Middleware & Test Automation Architect
 </p>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+  const BACKEND_URL = "https://YOUR_BACKEND_URL.onrender.com";
+
+  async function analyzeLogs() {
+    const logs = document.getElementById("logsInput").value;
+    document.getElementById("logOutput").innerText = "Analyzing logs...";
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/log-analyzer`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ logs })
+      });
+
+      const data = await res.json();
+      document.getElementById("logOutput").innerText = data.result;
+    } catch (err) {
+      document.getElementById("logOutput").innerText =
+        "Error connecting to backend. Please try again later.";
+    }
+  }
+
+  async function generateTests() {
+    const requirement = document.getElementById("testGenInput").value;
+    document.getElementById("testGenOutput").innerText =
+      "Generating test artifacts...";
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/testgen`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ requirement })
+      });
+
+      const data = await res.json();
+      document.getElementById("testGenOutput").innerText = data.result;
+    } catch (err) {
+      document.getElementById("testGenOutput").innerText =
+        "Error connecting to backend. Please try again later.";
+    }
+  }
+</script>
 
 </body>
 </html>
