@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TraceFlow – Kafka & Middleware Validation</title>
-  <meta charset="utf-8">
+  <title>TraceFlow AI</title>
 </head>
 <body style="font-family: Arial; padding: 40px;">
-  <h1>TraceFlow</h1>
-  <h3>Migration-grade Kafka & Middleware Validation</h3>
+  <h1>TraceFlow AI</h1>
+  <p>Paste logs. Get root cause. Fix faster.</p>
 
-  <p>
-    I help teams validate DB → Kafka and Kafka → Kafka pipelines
-    using trace-based testing.
-  </p>
+  <textarea id="logs" rows="15" cols="100"
+    placeholder="Paste your logs here..."></textarea><br><br>
 
-  <p>
-    📧 Contact: <b>admin@traceflow.in</b>
-  </p>
+  <button onclick="analyze()">Analyze Logs</button>
+
+  <pre id="output" style="margin-top:20px;"></pre>
+
+<script>
+async function analyze() {
+  const logs = document.getElementById("logs").value;
+  document.getElementById("output").innerText = "Analyzing...";
+
+  const res = await fetch("/analyze", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({logs})
+  });
+
+  const data = await res.json();
+  document.getElementById("output").innerText = data.analysis;
+}
+</script>
 </body>
 </html>
